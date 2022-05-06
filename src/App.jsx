@@ -1,11 +1,13 @@
-import { Went2App } from "./Components/Went2App";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { store } from "./Store/Store";
+import { Provider } from "react-redux";
+import { AppRouter } from './Routes/AppRouter';
 
 function App() {
   return (
-    <>
-      <Went2App />
-    </>
+    <Provider store={ store } >
+      <AppRouter />
+    </Provider>
   )
 }
 
