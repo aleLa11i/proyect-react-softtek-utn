@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import * as moment from 'moment';
 
 export const PostItem = ( {data} ) => {
-  console.log(moment.locale());
   const navigate = useNavigate();
   
   return (
@@ -13,35 +12,38 @@ export const PostItem = ( {data} ) => {
           className='my-3 post-item' 
         >
           <ListGroup.Item>
-            <Image 
+            {/* <Image 
               className='img-face-post me-3'
               src={ data.user.image } 
-              circle 
-            />
+              roundedCircle
+            /> */}
             { data.user.name }
           </ListGroup.Item>
 
           <Card.Body>
-            <Card.Img 
+            {/* <Card.Img 
               className='post-img'
               variant="top" 
               src={ data.mainimage } 
-            />
+            /> */}
             <Card.Title>
               { data.title }
             </Card.Title>
-            <Card.Text>
+            
+            <div>
               <p
-                className='txt-post-overflow'
+                 className='txt-post-overflow'
               >
               { data.description }
               </p>
+
               <h6
                 className='time-post'
-              >
+                >
                 { moment(data.date).calendar() }
               </h6>
-            </Card.Text>
+            </div>
+
           </Card.Body>
 
           <Button 

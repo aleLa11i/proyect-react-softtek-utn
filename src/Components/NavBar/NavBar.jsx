@@ -30,7 +30,7 @@ export const NavBar = () => {
  const dispatch = useDispatch();
   return (
     <Nav 
-        inverse
+        // inverse
         fill variant='tabs' 
         defaultActiveKey='link-2'  // guardar en local storage
     >
