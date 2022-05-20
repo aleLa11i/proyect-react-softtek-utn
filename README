@@ -1,0 +1,23 @@
+-----------Proyecto Final Curso React UTN+Sofftek-------------------
+
+Aplicación: went2-app
+
+La aplicación, es basicamente, una red social donde te podes loguear ( o  registrar ) y subir posts y compartirlos con el resto de la red social. Los posts se basan en albumes de fotos de diferentes temas y tienen un título, un descripción, una galería de imagenes y una imagen principal. Tiene 3 secciones, el profile o perfil, el home y una seccion "New Post" para subir un post. Un nav que permite navegar por estas 3 secciones y un botón de deslogueo.
+
+Para comenzar, ejecutar "npm install" para que se instalen todas las dependencias.
+
+Luego, ejecutar "npm run dev" - lo que permite levantar la Aplicación utilizando Vite 
+
+La Aplicación posee un backend por separado, la cual debe haber sido enviado junto con los archivos del front.
+
+( Para probar correctamente la aplicación se recomienda descargar varios albumes de fotos, o tenerlas listas en la PC, además, algunas fotos de perfil para poder crear varios usuarios y ponerle una foto de perfil )
+
+Tiene un login, lo que hace una petición al backend y trae los datos del usuario y el token que tiene una duración de 2 horas. 
+Además, posee un register, donde se puede colocar una imagen de perfil para el usuario.
+
+Al loguearse, redirigirá al Home, donde muestra todas las publicaciones de los usuarios ordenadas por las más reciente.
+En Profile, se puede ver los datos del perfil ( Nombre, mail e imagen ) y ademas todas las publicaciones que subiste en tu perfil.
+
+Cada publicación tiene un botón "Ver" donde se puede observar el Título, una pequeña descripción y todas las fotos que se subieron al post. Al clickear en una foto del albúm, se puede observar un zoom para apreciar mejor la imagen.
+
+En la seccion "New Post" - podemos subir un nuevo post desde nuestro perfil, primero nos solicitará una foto principal del post, luego todo el album de fotos ( no hay límite de fotos ) y por último, un título ( obligatorio ) y una descripción, que es lo único que no es obligatorio de los posts.
