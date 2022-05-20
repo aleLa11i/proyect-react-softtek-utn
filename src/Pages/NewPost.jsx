@@ -2,21 +2,17 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { Loading } from "../Components/NewPost/Loading";
 import { SetDescription } from "../Components/NewPost/SetDescription/SetDescription";
-import { UploadImages } from "../Components/NewPost/UploadImages/UploadImages";
-import { UploadMainImage } from "../Components/NewPost/UploadMainImage/UploadMainImage";
+import { ImagesAlbum } from "../Components/NewPost/UploadImages/ImagesAlbum";
+import { MainImage } from "../Components/NewPost/UploadImages/MainImage";
 
 export const NewPost = () => {
 
-  const {mainimage, images}= useSelector(state => state.newpost)
-  const loading = false;
-
-  console.log(images.length)
-  console.log(mainimage)
+  const {mainimage, images, finish}= useSelector(state => state.newpost)
 
   return (
     <>
       {
-        (loading)
+        (finish)
           ?
         <Loading /> 
           :
@@ -29,10 +25,10 @@ export const NewPost = () => {
                 ? 
             <SetDescription /> 
                 : 
-            <UploadImages />
+            <ImagesAlbum />
           )
               :
-        <UploadMainImage />  
+        <MainImage />  
         )
       }
     </>

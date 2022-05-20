@@ -1,27 +1,28 @@
-import { Figure, Button } from "react-bootstrap";
+import { Figure, Button, Image } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 export const ProfileData = () => {
-  return (
-    <div className="row m-5">
-      
-      <Figure
-        className="col-3"
-      >
-        <Figure.Image
-          className="rounded-circle"
-          width={300}
-          height={300}
-          alt="150x150"
-          src="https://img.freepik.com/vector-gratis/avatar-personaje-empresario-aislado_24877-60111.jpg?w=2000"
-        />
-      </Figure>
 
-      <div className="d-flex flex-column col-6 mx-5">
-        <h1>Nombre</h1>
-        <h4>Username</h4>
-        <p>
-          Descripcion......
-        </p>
+  const {name, image, email}= useSelector(state => state.auth)
+
+  return (
+    <div className='d-flex align-items-center justify-content-center m-3 mx-5 flex-wrap'>
+      <Image
+        className='rounded-circle'
+        style={{'objectFit':'cover'}}
+        width={150}
+        height={150}
+        src={
+          image
+            ||
+          'https://img.freepik.com/vector-gratis/avatar-personaje-empresario-aislado_24877-60111.jpg?w=2000'
+        }
+      />
+
+      <div className='d-flex flex-column m-5'>
+        <h1>{ name }</h1>
+        <h4>{ email }</h4>
+        
       </div>
 
     </div>

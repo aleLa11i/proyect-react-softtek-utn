@@ -1,23 +1,10 @@
-import { Redirect, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router';
 
-export const PubliceRoute = ({
-    isAuthenticated,
-    component: Component,
-    ...rest
-}) => {
-
-
-    return (
-        
-        <Route {...rest}
-            component={(props) =>{
-
-                return (isAuthenticated)?
-                (<Redirect to="/" />):
-                (<Component {...props} />)
-            }
-                
-        }
-        />
-    );
-};
+export const PublicRoute = ({ children, isAuth }) => {    
+    if (isAuth) {
+        return <Navigate to='/*' />;
+    }
+    
+    return children;
+}

@@ -1,27 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
-
 const initialState = {
-    postId:             null,
+    finish:             false,
     title:              '',
     mainimage:          null,
     images:             [],
-    description:        '',
-    stars:[ {
-                        name:'food',
-                        value:null
-    }, {
-                        name:'place',
-                        value:null
-    }, {
-                        name:'view',
-                        value:null
-    }, {
-                        name:'entertainment',
-                        value:null
-    }, {
-                        name:'weather',
-                        value:null
-    } ]
+    description:        ''
     
 }
 
@@ -52,10 +34,10 @@ export const NewPostReducer = (state = initialState, action) => {
                 ...state,
                 stars: state.stars.map( star => ( star.name === action.payload.name ) ? action.payload : star )
             })
-        case "New Post":
+        case "New Post Finish":
             return ({
-                ...state,
-                postId: uuidv4()
+                state,
+                finish: action.payload,
             })
         default:
             return state;

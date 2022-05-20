@@ -1,49 +1,39 @@
 import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { DescriptionStarItem } from './DescriptionStarItem';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadNewPost } from '../../../Actions/posts';
 import { DescriptionTextArea } from './DescriptionTextArea';
 import { DescriptionTitle } from './DescriptionTitle';
 
-const data =[ 
-  { 
-    label:'Comida',
-    name: 'food'
-  },
-  { 
-    label:'Lugar',
-    name: 'place'
-  },
-  { 
-    label:'Vista',
-    name: 'view'
-  },
-  { 
-    label:'Entretenimiento',
-    name: 'entertainment'
-  },
-  { 
-    label:'Tiempo',
-    name: 'weather'
-  }
-  ]
 
 export const SetDescription = () => {
+
+  const { title, mainimage, images, description }= useSelector(state => state.newpost)
+  const { uid, name, image }= useSelector(state => state.auth)
+  const post = ({ 
+        user: { 
+            uid,
+            name, 
+            image
+        }, 
+        postId: uuidv4(),  
+        title, 
+        mainimage, 
+        images, 
+        description,
+        date: new Date()
+    })
+
+  const dispatch = useDispatch();
+
   return (
     <div
-        className='d-flex flex-column m-4'
+        className='d-flex align-items-center flex-column m-4'
     >
         <DescriptionTitle />
         <DescriptionTextArea />
-        {
-            data.map( (item,index) => (
-              <DescriptionStarItem
-                label={item.label}
-                name={item.name}
-                key={index}
-              />
-            ))
-        }
-      <Button className='next-button' onClick > Finalizar</Button>
+      <Button className='next-button' onClick={ () => dispatch( uploadNewPost(post) ) } > Finalizar</Button>
     </div>
   )
 }

@@ -1,18 +1,22 @@
-import { faFolderPlus } from '@fortawesome/free-solid-svg-icons';
+import { faFolderPlus, faHouse, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Nav } from 'react-bootstrap';
+import { Button, Nav } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { startLogout } from '../../actions/auth';
 
 const routes = [
     {
         route: '/profile',
         eventKey: 'link-1',
-        name: 'Profile'
+        name: 'Profile',
+        icon: faUser
     },
     {
         route: '/home',
         eventKey: 'link-2',
-        name: 'Home'
+        name: 'Home',
+        icon: faHouse
     },
     {
         route: '/newpost',
@@ -23,11 +27,12 @@ const routes = [
 ]
 
 export const NavBar = () => {
+ const dispatch = useDispatch();
   return (
     <Nav 
-        className='nav'
+        inverse
         fill variant='tabs' 
-        defaultActiveKey='link-1'  // guardar en local estorash
+        defaultActiveKey='link-2'  // guardar en local storage
     >
         {
             routes.map(({route, eventKey, icon, name}) => (
@@ -35,17 +40,30 @@ export const NavBar = () => {
                     key={ eventKey }
                 >
                     <Nav.Link
-                        className='nav-link'
+                        className='link'
                         as={Link} 
                         to={route} 
                         eventKey={eventKey}
                     >
-                        { icon && <FontAwesomeIcon icon={icon} /> }
-                        { name }
+                        <FontAwesomeIcon icon={icon} />
+                        &nbsp;
+                        &nbsp;
+                        <h6
+                            className='d-inline nav-text'
+                        >
+                            {name}
+                        </h6>
                     </Nav.Link>
                 </Nav.Item>
             ))
         }
+        <Button 
+            variant='danger'
+            className='mb-2 mt-1 mx-2'
+            onClick={ () => dispatch( startLogout() ) }
+        >
+            Logout
+        </Button>
     </Nav>
   )
  }

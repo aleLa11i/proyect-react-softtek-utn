@@ -5,14 +5,18 @@ export const StartLogin = (value) => {
   return async (dispatch) => {
     const resp = await fetchWithoutToken("auth", value, "POST");
     const body = await resp.json();
+    console.log(body);
     if (body.ok) {
       localStorage.setItem("token", body.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
+      console.log(body);
       dispatch(
         login({
           uid: body.uid,
           name: body.name,
+          email: body.email,
+          image: body.image
         })
       );
     } else if (body.msg) {
@@ -39,6 +43,8 @@ export const StartRegister = (value) => {
         login({
           uid: body.uid,
           name: body.name,
+          email: body.email,
+          image: body.image
         })
       );
     } else if (body.msg) {
@@ -53,13 +59,12 @@ export const StartRegister = (value) => {
   };
 };
 
-export const Checking = () => {
+export const Checking = ( data ) => {
   return async (dispatch) => {
     const resp = await fetchWithToken("auth/renew");
     const body = await resp.json();
-
+    
     if (body.ok) {
-      console.log("Se ha renovado el token.");
       localStorage.setItem("token", body.token);
       localStorage.setItem("token-init-date", new Date().getTime());
 
@@ -67,6 +72,8 @@ export const Checking = () => {
         login({
           uid: body.uid,
           name: body.name,
+          email: body.email,
+          image: body.image
         })
       );
     }
@@ -91,5 +98,5 @@ const login = (payload) => ({
 });
 
 const logout = () => ({ type: "Logout" });
-const cleanLogout = () => ({ type: "Logout" });
+const cleanLogout = () => ({ type: "Logout Clean" });
 const FinishCheck = () => ({ type: "Finish Checking" });

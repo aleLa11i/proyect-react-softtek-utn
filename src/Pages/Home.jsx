@@ -1,11 +1,10 @@
-import { HomeItem } from '../Components/Home/HomeItem';
-
-const data = [ 1,2,3,4,5,6,7 ]
+import { useSelector } from 'react-redux';
+import { PostList } from '../Components/Posts/PostList';
 
 export const Home = () => {
+  const {posts} = useSelector( state => state.posts )
+
   return (
-    <>
-      {data.map( item  => <HomeItem key={ item } /> )}
-    </>
+    <PostList posts={ posts } />
   )
 }

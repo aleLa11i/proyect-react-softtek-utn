@@ -1,30 +1,15 @@
 import { faImages, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { addImages } from '../../../Actions/newpost';
+import { addImages } from '../../../Actions/posts';
+import { useImage } from '../../Hooks/useImage';
 
-export const UploadImages = () => {
+export const ImagesAlbum = () => {
     const dispatch = useDispatch();
-    const [images, setImages] = useState([]);
-    const [newImages, setNewImages] = useState([]);
-
-    useEffect(() => {
-        if(newImages.length>0){
-            console.log('efecto');
-            Array.from(newImages).forEach( img => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setImages(img => [...img, reader.result]);
-                };
-                reader.readAsDataURL(img);
-            })
-        }
-        setNewImages([])
-
-    }, [newImages.length]);
-
+    const { imageUrl, handleChange } = useImage();
+    
   return (
     <div
       className='m-5 d-flex flex-column align-items-center justify-content-center'
@@ -36,7 +21,7 @@ export const UploadImages = () => {
             type="file"
             name="Images"
             id="ImagesUpload"
-            onChange={(e) => setNewImages(e.target.files)}
+            onChange={handleChange}
             style={{
               display: "none",
             }}
@@ -59,16 +44,16 @@ export const UploadImages = () => {
         </div> 
 
             {
-                (images.length!==0)
+                (imageUrl.length>0)
                     &&
                 (
                     <>
-                        <Button onClick={()=>dispatch(addImages(images))}> Siguiente</Button>
+                        <Button onClick={()=>dispatch(addImages(imageUrl))}> Siguiente</Button>
                         
                         <div
                             className='d-flex flex-wrap justify-content-center' 
                         >
-                            {images.map( (img,index) =>(
+                            {imageUrl.map( (img,index) =>(
                                 <img 
                                     className='m-3'
                                     key={index}

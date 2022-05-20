@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter as Router,Redirect} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter, Routes, Navigate, Route} from 'react-router-dom';
 import { Checking } from '../actions/auth';
 import { AuthRouter } from './AuthRouter';
 import { DashboardRoutes } from './DashboardRoutes';
 import { PrivateRoute } from './PrivateRoute';
-import { PubliceRoute } from './PublicRoute';
+import { PublicRoute } from './PublicRoute';
+import { useSelector } from 'react-redux';
 
 export const AppRouter = () => {
-
+    
     const dispatch = useDispatch();
     const {name}= useSelector(state => state.auth)
     useEffect(() => {
@@ -17,14 +18,31 @@ export const AppRouter = () => {
 
     }, [dispatch])
 
-    return (
-        <div>
-            <Router>
-                    <PubliceRoute path="/auth" component={ AuthRouter } isAuthenticated={ !!name } />
-                    <PrivateRoute exact path="/" component={ DashboardRoutes } isAuthenticated={ !!name }/>
-
-                    <Redirect to="/" />
-            </Router>
-        </div>
+    return (  
+        <BrowserRouter>
+            <Routes> 
+                <Route 
+                    exact path='auth/*' 
+                    element={ 
+                        <PublicRoute
+                            isAuth={ !!name }
+                        >
+                            <AuthRouter />
+                        </PublicRoute>
+                    } 
+                />
+                <Route 
+                    exact path='/*' 
+                    element={ 
+                        <PrivateRoute
+                            isAuth={ !!name }
+                        >
+                            <DashboardRoutes />
+                        </PrivateRoute>
+                    } 
+                />
+            </Routes>
+        </BrowserRouter>
+        
     )
 }
