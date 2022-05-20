@@ -12,20 +12,20 @@ export const PostItem = ( {data} ) => {
           className='my-3 post-item' 
         >
           <ListGroup.Item>
-            {/* <Image 
+            <Image 
               className='img-face-post me-3'
               src={ data.user.image } 
               roundedCircle
-            /> */}
+            />
             { data.user.name }
           </ListGroup.Item>
 
           <Card.Body>
-            {/* <Card.Img 
+            <Card.Img 
               className='post-img'
               variant="top" 
               src={ data.mainimage } 
-            /> */}
+            />
             <Card.Title>
               { data.title }
             </Card.Title>
